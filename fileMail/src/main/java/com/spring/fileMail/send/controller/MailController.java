@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.spring.fileMail.send.service.MailService;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 @RequestMapping(value="/mail/")
@@ -25,10 +24,10 @@ public class MailController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
-	
+	/*
 	@Autowired
 	private MailService mailService;
-	/*
+	
 	@RequestMapping("/send")
 	public String showSend() {
 		return "fileMail/mailsend";
@@ -70,9 +69,9 @@ public class MailController {
         }
 	}
 	*/
-	
+	// mailsend.jsp
 	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
-    public Map<String,Object> sendMailTest(@RequestParam(required = false) MultipartFile fileUpForm,@RequestParam Map<String, String> param,HttpServletRequest request) throws Exception{
+    public Map<String,Object> sendMailTest(@RequestParam(required = false) MultipartFile fileUpForm,@RequestParam Map<String, String> param, MultipartHttpServletRequest request) throws Exception{
         
 		Map<String, Object> respMap = new HashMap<String, Object>();
 		
@@ -108,4 +107,34 @@ public class MailController {
         return respMap;
 	}
 	
+	/*
+	// mailSending 코드
+		@RequestMapping(value = "mailSending.do")
+		public String mailSending(HttpServletRequest request, MultipartHttpServletRequest multi) {
+
+
+			String setfrom = "mailsender114@gmail.com";
+			String tomail = request.getParameter("tomail"); 
+			String title = request.getParameter("title"); 
+			String content = request.getParameter("content");
+	       
+
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+
+				messageHelper.setFrom(setfrom); 
+				messageHelper.setTo(tomail); 
+				messageHelper.setSubject(title);
+				messageHelper.setText(content); 
+
+				mailSender.send(message);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+
+			//return "redirect:/main.do";
+			return "/mailsend";
+		}
+	*/
 }

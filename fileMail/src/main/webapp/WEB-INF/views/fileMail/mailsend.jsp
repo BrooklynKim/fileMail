@@ -26,7 +26,7 @@
 		</div>
 		
 		<div>
-			<input id="file" type="file" name="file" placeholder="파일" />
+			<input id="fileUpForm" type="file" name="fileUpForm" placeholder="파일" />
 		</div>
 		
 		<div>
@@ -56,18 +56,17 @@
 						{	name : 'table',		items : [ 'Table' ]	} 
 					 ],
 					});
-		
 		*/
 		
 		function sendMail(){
 			var form = new FormData();
 			var url = "/mail/sendMail";
 			
-			form.append("from",$("#fromEmail").val());
-			form.append("to",$("#toEmail").val());	
+			form.append("fromEmail",$("#fromEmail").val());
+			form.append("toEmail",$("#toEmail").val());
 			form.append("subject",$("#subject").val());
 			form.append("content",$("#content").val());
-			form.append("file",$("#file").val());
+			form.append("fileUpForm",$("#fileUpForm").val());
 			
 			$.ajax({
 				url : url,

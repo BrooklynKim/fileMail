@@ -5,15 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>메일발송</title>
+<!--  
 <script src="https://cdn.ckeditor.com/4.8.0/full-all/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+-->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 </head>
 <body>
-	<!-- <form name="formName1" id="formName1" enctype="multipart/form-data"> -->
+	 
 		<div>
-			<input id="fromEmail" type="email" name="email" placeholder="보내는 이메일"
-				required="required" autofocus="autofocus">
+			<input id="fromEmail" type="email" name="email" 
+				required="required" value="mailsender114@gmail.com">
 		</div>
 		
 		<div>
@@ -56,7 +59,7 @@
 						{	name : 'table',		items : [ 'Table' ]	} 
 					 ],
 					});
-		*/
+	*/	
 		
 		function sendMail(){
 			var form = new FormData();
@@ -83,13 +86,9 @@
 					}else{
 						alert("email 전송에 실패했습니다.");
 					}
-					
-					
 				}
 			});
 		}
-		
-		
 	</script>
 </body>
 </html>

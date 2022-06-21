@@ -20,7 +20,7 @@
 		</div>
 		
 		<div>
-			<input id="toEmail" type="email" name="email" placeholder="받는 이메일"
+			<input id="toEmail" type="email" name="email" placeholder="받는 사람"
 				required="required" autofocus="autofocus">
 		</div>
 

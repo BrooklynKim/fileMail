@@ -13,7 +13,7 @@
 
 </head>
 <body>
-	 
+	 <form>
 		<div>
 			<input id="fromEmail" type="email" name="email" 
 				required="required" value="mailsender114@gmail.com">
@@ -40,6 +40,7 @@
 		<div>
 			<input type="button" value="전송" onclick="sendMail()">
 		</div>
+	</form>	
 	<!--  </form>-->
 	
 	<script type="text/javascript">
@@ -69,7 +70,7 @@
 			form.append("toEmail",$("#toEmail").val());
 			form.append("subject",$("#subject").val());
 			form.append("content",$("#content").val());
-			form.append("fileUpForm",$("#fileUpForm").val());
+			form.append("fileUpForm",$("#fileUpForm")[0].files[0]);
 			
 			$.ajax({
 				url : url,

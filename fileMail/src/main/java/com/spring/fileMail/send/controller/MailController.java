@@ -25,10 +25,8 @@ public class MailController {
 	
 	@Autowired
 	private JavaMailSender mailSender;
-	
-	// mailsend.jsp
 		@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
-	    public Map<String,Object> sendMailTest(@RequestParam(required = false) MultipartFile fileUpForm,@RequestParam Map<String, String> param, MultipartHttpServletRequest request) throws Exception{
+	    public Map<String,Object> sendMailTest(@RequestParam(value="fileUpForm", required = false) MultipartFile fileUpForm,@RequestParam Map<String, String> param, MultipartHttpServletRequest request) throws Exception{
 	        
 			Map<String, Object> respMap = new HashMap<String, Object>();
 			
@@ -38,15 +36,27 @@ public class MailController {
 	        String content = param.get("content");
 	        
 	        MultipartFile mailFile = fileUpForm;
-	        String oriFileNm = param.put("oriFileNm",mailFile.getOriginalFilename());
+	        param.put("oriFileNm",mailFile.getOriginalFilename());
+	        String oriFileNm = param.get("oriFileNm");
 	        
-	        //파일처리
-	        //String attachFile = param.get("fileUpForm");
-	        String convertNm = new String(oriFileNm.getBytes("8859_1"),"UTF-8");//한글처리
-	        //File path = new File(request.getServletContext().getRealPath("/C:\\Users\\brooklyn\\Desktop\\Study\\fileMail"),"random");
+	        //규칙 사이 문자열 추출
+	        int beginIndex = oriFileNm.lastIndexOf("_")+1;
+	        int endIndex = oriFileNm.lastIndexOf(".");
+	        String result = oriFileNm.substring(beginIndex, endIndex);
+	        
 	        /*
+	        String oriFileNmTemp = oriFileNm.substring(oriFileNm.lastIndexOf(".") -1).toString();
+	        String names[] = oriFileNmTemp.split("_");
+	        */
+	        
+	        /*
+	        //파일처리
+	        String attachFile = param.get("fileUpForm");
+	        String convertNm = new String(oriFileNm.getBytes("8859_1"),"UTF-8");//한글처리
+	        File path = new File(request.getServletContext().getRealPath("/C:\\Users\\brooklyn\\Desktop\\Study\\fileMail"),"random");
+	        
 	        Pattern pattern = Pattern.compile("_(.*?).");
-	        Matcher matcher = pattern.matcher(convertNm);
+	        Matcher matcher = pattern.matcher(oriFileNm);
 	        if(matcher.find()) {
 	        	System.out.println(matcher.group(1));
 	        }
@@ -61,11 +71,11 @@ public class MailController {
 	            mailHelper.setText(content, true);
 	            
 	            //FileSystemResource file = new FileSystemResource(new File("C:\\Users\\brooklyn\\Desktop\\Study\\testFile.txt"));
-	            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\brooklyn\\Desktop\\Study\\"));
-	            mailHelper.addAttachment("testFile.txt", file);
+	            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\brooklyn\\Desktop\\Study\\fileMail\\"+oriFileNm.toString())); 
+	            //mailHelper.addAttachment(oriFileNm.toString(), file);
 	            
-	            if(convertNm == "홍길동") {
-	            	mailHelper.addAttachment(convertNm, file);
+	            if("홍길동".equals(result)) { 
+	            	mailHelper.addAttachment(oriFileNm.toString(), file);
 	            }
 	            
 	            

@@ -10,37 +10,56 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
 -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-
+<link rel="stylesheet" href="resources/css/board.css">
 </head>
 <body>
-	 <form>
-		<div>
+
+<table class="type02">
+	 
+	 <tr>
+	 	<th scope="row">보내는 사람</th>
+		<td>
 			<input id="fromEmail" type="email" name="email" 
 				required="required" value="mailsender114@gmail.com">
-		</div>
-		
-		<div>
+		</td>
+	</tr>
+	
+	<tr>
+		<th scope="row">받는 사람</th>	
+		<td>
 			<input id="toEmail" type="email" name="email" placeholder="받는 사람"
-				required="required" autofocus="autofocus">
-		</div>
-
-		<div>
-			<input id="subject" type="text" name="title" placeholder="제목" required="required">
-		</div>
-		
-		<div>
+				required="required" autofocus="autofocus" style="border: none;">
+		</td>
+	</tr>
+	
+	<tr>
+		<th scope="row">제목</th>
+		<td>
+			<input id="subject" type="text" name="title" placeholder="제목" required="required" style="border: none;" >
+		</td>
+	</tr>
+	
+	<tr>
+		<th scope="row">첨부 파일</th>	
+		<td>
 			<input id="fileUpForm" type="file" name="fileUpForm" placeholder="파일" />
-		</div>
-		
-		<div>
-			<textarea id="content" name="body" placeholder="내용"
-				required="required"></textarea>
-		</div>
-
-		<div>
+		</td>
+	</tr>
+	
+	<tr>
+		<th scope="row">내용</th>	
+		<td>
+			<textarea id="content" name="body" class="content"	placeholder="내용"
+				required="required" style="border: none;"></textarea>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
 			<input type="button" value="전송" onclick="sendMail()">
-		</div>
-	</form>	
+		</td>
+	</tr>
+</table>	
 	<!--  </form>-->
 	
 	<script type="text/javascript">

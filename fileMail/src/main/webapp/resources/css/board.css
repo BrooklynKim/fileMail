@@ -28,9 +28,30 @@ table.type02 td {
   border-bottom: 1px solid #ccc;
 }
 
-textarea {
-    width: 100%;
-    height: 6.25em;
-    border: none;
-    resize: none;
-  }
+
+table{
+	width : 100%;
+	height: 100%;
+}
+
+table.type06 {
+  border-collapse: collapse;
+  text-align: left;
+  line-height: 1.5;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin: 20px 10px;
+}
+table.type06 th {
+  width: 150px;
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+}
+table.type06 td {
+  width: 350px;
+  padding: 10px;
+  vertical-align: top;
+}
+table.type06 .even {
+  background: #efefef;

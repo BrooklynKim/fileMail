@@ -95,7 +95,6 @@
 			processData: false,   
             contentType: false,
             cache: false,
-			//data : form,
 			data : form,
 			success:function(data){
 				var state = data.state

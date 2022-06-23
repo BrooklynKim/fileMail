@@ -1,8 +1,6 @@
 package com.spring.fileMail.send.controller;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -83,7 +81,7 @@ public class MailController {
 	     	        String result = oriFileNm.substring(beginIndex, endIndex);
 	     	        
 	     	        MimeMessage mail = mailSender.createMimeMessage();
-		            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
+		            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"charset=UTF-8");
 		            
 		            mailHelper.setFrom(from);
 		            mailHelper.setTo(to);

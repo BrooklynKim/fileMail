@@ -28,6 +28,29 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		
+				<!-- MySQL 설정 -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.49</version>
+		</dependency>
+		
+		
+		<!-- Spring 설정 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!--  DataSource 설정 -->
+		<dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.4</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>

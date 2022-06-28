@@ -55,7 +55,6 @@
 						<input type="radio" name="rdoUseYn" id="rdoUseYnY" value="N">
 							<span>N</span>
 						<input type="button" value="등록" onclick="addMember()">
-						<input type="button" value="수정" onclick="updateMember()">
 					</td>	
 			</tr>
 		</table>
@@ -87,6 +86,7 @@
 		colNames : colNames,
 		colModel : colModel,
 		multiselect : true, // 셀렉트 박스
+		//rownumbers : true, // 자동으로 생성된 rowNum
 		rowNum : 10,
 		caption : "사원리스트",
 		sortname : 'A_NAME',
@@ -185,23 +185,72 @@
 						$('[name=rdoUseYn]:checked').val("");
 					}
 				}
-			});		
+			});
+			
 	}
-	
-	
-	/*
-	function updateMember(){
-		var form = new FormData();
-		var url = "/member/updateMember"
-		
-		form.append("aEmail",$("#email").val());
-		form.append("aName",$("#name").val());
-		form.append("aEmail",$("#email").val());
-	}
-	*/
-	
 
 </script>
 
+<!--  jqGrid로 바꾸기 전 Ver
+	<h2>모든 회원보기 및 추가등록</h2>	
+	<a href="#" onClick="history.back()">메일전송</a>  
+	<hr></hr>
+	<input id="email" type="email" name="email" required="required" placeholder="이메일을 입력해주세요">
+	<input id="name" type="text" name="title" placeholder="이름을 입력해주세요" required="required" >
+	<input type="radio" name="rdoUseYn" id="rdoUseYnY" value="Y">
+		<span>Y</span>
+	<input type="radio" name="rdoUseYn" id="rdoUseYnY" value="N">
+		<span>N</span>
+	<input type="button" value="등록" onclick="addMember()">
+		<br></br>
+			
+
+	<div id="userList"></div>
+	
+	
+	<script type="text/javascript">
+
+	
+	$(function() {
+		memberList();
+	});
+	
+	function memberList(){
+	$.ajax({
+		   url:"/member/memberList",		
+		   type:"GET",
+		   data : {},
+		   dataType: "JSON",
+		   success:function(data){
+			   
+			   var list = data.list;
+			    var tr = '<table border="1"><thead>'+
+		        	    '<tr>' +
+		                      '<th>이메일</th>'+
+		                      '<th>이름 </th>'+
+		                      '<th>사용여부 </th>'+
+		               	    '</tr>'+
+		                  '</thead>';
+		      
+		     	$.each(list , function(i){
+		          tr += '<tr><td>' +  list[i].A_EMAIL + '</td><td>' + list[i].A_NAME + '</td><td>' + list[i].USE_YN + '</td></tr>';
+		        });
+		        
+		        	// 테이블에 추가
+		        	tr += '</table>';
+		        	
+		        	$("#userList").append(tr);
+		   },
+		   error : function(xhr, status, error) {
+			   alert(xhr.status);
+		   },
+			complete : function(){
+			}
+		});
+	
+	}
+	</script>
+
+-->
 </body>
 </html>

@@ -15,5 +15,13 @@ public class MemberDao {
 	public List<Map<String,Object>> selectMemberList(Map<String,String> param) throws Exception{
 		return sqlSession.selectList("member.selectMemberList",param);
 	}
+	
+	public void insetMember(Map<String, String> param) throws Exception{
+	       sqlSession.insert("member.insetMember", param);
+    }
+	
+	public void updateMember (Map<String, String> param) throws Exception {
+		sqlSession.update("member.updateMember", param);
+	}
 
 }

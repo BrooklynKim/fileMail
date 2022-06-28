@@ -34,5 +34,18 @@ public class MemberController {
 	public Map<String , Object> memberList (@RequestParam Map<String, String> param) throws Exception {
 		return memberService.selectMemberList(param);
 	}
+	
+	@RequestMapping(value="/addMember", produces = "application/text; charset=UTF-8")
+	@ResponseBody
+	public Map<String , Object> addMember (@RequestParam Map<String, String> param) throws Exception {
+		return memberService.insertMember(param);
+	}
+	
+	
+	@RequestMapping("/modUser")
+	@ResponseBody
+	public Map<String , Object> updateUser (@RequestParam Map<String, String> param) throws Exception {
+		return memberService.updateMember(param);
+	}
 
 }

@@ -3,10 +3,36 @@
 <mapper namespace="member">
 	
 	<select id="selectMemberList" parameterType="Map" resultType="Map">
-		SELECT		 A_EMAIL
+		SELECT		A_NUM
+					,A_EMAIL
 					,A_NAME
 					,USE_YN
 		FROM		MEMBER
+		ORDER BY 	A_NUM DESC
 	</select>
+	
+	<insert id="insetMember">
+		INSERT INTO MEMBER (
+				A_NUM
+			   ,A_EMAIL
+			   ,A_NAME
+			   ,USE_YN
+	    	)VALUES(
+	    		DEFAULT
+	    	   ,#{aEmail}
+	    	   ,#{aName}
+	    	   ,#{rSelect}
+	    	)
+	</insert>
+	
+	<update id="updateMember">
+		UPDATE		MEMBER
+		SET			A_NUM		= #{aNum}
+				   ,A_EMAIL		= #{aEmail}
+				   ,A_NAME		= #{aName}
+				   ,USE_YN		= #{useYn}
+		WHERE		A_NUM		= #{aNum}		   
+	</update>
+	
 	
 </mapper>

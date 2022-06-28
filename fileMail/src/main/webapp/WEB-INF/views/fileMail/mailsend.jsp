@@ -55,7 +55,7 @@
 	</table>
 </form>	
 
-<a type="button" href="/member/memberListPage">멤버리스트</a>
+<button type="button" onclick="location.href='/member/memberListPage'">사원리스트</button>
 	<!--  </form>-->
 	<script type="text/javascript">
 	

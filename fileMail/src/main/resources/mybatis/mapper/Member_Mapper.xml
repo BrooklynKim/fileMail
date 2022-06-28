@@ -25,6 +25,7 @@
 	    	)
 	</insert>
 	
+	<!--  
 	<update id="updateMember">
 		UPDATE		MEMBER
 		SET			A_NUM		= #{aNum}
@@ -33,6 +34,25 @@
 				   ,USE_YN		= #{useYn}
 		WHERE		A_NUM		= #{aNum}		   
 	</update>
+	-->
+	<update id="updateMember">
+		UPDATE		MEMBER
+		SET		    A_EMAIL		= #{aEmail}
+				   ,USE_YN		= #{useYn}
+		WHERE		A_NUM		= #{aNum}		   
+	</update>
 	
+	<select	id="emailCheck" resultType="int">
+		SELECT 		COUNT(A_EMAIL)
+		FROM		MEMBER
+		WHERE		A_EMAIL = #{email}
+	</select>
+	
+	
+	<update id="deleteMember">
+		UPDATE		MEMBER
+		SET			USE_YN		=		"N"
+		WHERE		A_NUM		=		#{aNum}
+	</update>
 	
 </mapper>

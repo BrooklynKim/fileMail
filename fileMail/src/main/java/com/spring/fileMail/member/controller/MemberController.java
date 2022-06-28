@@ -41,11 +41,25 @@ public class MemberController {
 		return memberService.insertMember(param);
 	}
 	
+	@RequestMapping("/emailCheck")
+	@ResponseBody
+	public int emailCheck(@RequestParam("email") String email) {
+		int cnt = memberService.emailCheck(email);
+		return cnt;
+	}
 	
-	@RequestMapping("/modUser")
+	
+	@RequestMapping("/updateMember")
 	@ResponseBody
 	public Map<String , Object> updateUser (@RequestParam Map<String, String> param) throws Exception {
 		return memberService.updateMember(param);
+	}
+	
+	
+	@RequestMapping(value="/delMember",  method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> delMember(@RequestParam Map<String, String> param) throws Exception{
+		return memberService.delMember(param);
 	}
 
 }

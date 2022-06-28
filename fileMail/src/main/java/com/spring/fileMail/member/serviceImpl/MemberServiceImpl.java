@@ -15,7 +15,7 @@ import com.spring.fileMail.member.service.MemberService;
 public class MemberServiceImpl implements MemberService{
 	@Autowired
 	MemberDao memberDao;
-	
+
 	@Override
 	public Map<String, Object> selectMemberList(Map<String, String> param) {
 		Map<String, Object> respMap = new HashMap<String, Object>();
@@ -50,6 +50,17 @@ public class MemberServiceImpl implements MemberService{
 		return respMap;
 	}
 	
+	@Override
+	public int emailCheck(String email) {
+		int cnt=0;
+		try {
+			cnt = memberDao.emailCheck(email);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+	
 	
 	@Override
 	public Map<String, Object> updateMember(Map<String, String> param) {
@@ -61,6 +72,25 @@ public class MemberServiceImpl implements MemberService{
 			e.printStackTrace();
 			respMap.put("state", "False");
 		}
+		return respMap;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String,Object> delMember(Map<String,String> param) {
+		
+		Map<String, Object> respMap = new HashMap<String, Object>();
+		try {
+			List<Map<String, Object>> delLst = (List<Map<String, Object>>) param.get("aNumList");
+				for (int i=0;i<delLst.size();i++) {
+					final Map<String, Object> delMap = new HashMap<String, Object>();
+					delMap.put("aNum",delLst.get(i).get("aNum"));
+					memberDao.deleteMember(delMap);
+				}
+		} 
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 		return respMap;
 	}
 

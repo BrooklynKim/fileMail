@@ -20,8 +20,16 @@ public class MemberDao {
 	       sqlSession.insert("member.insetMember", param);
     }
 	
+	public int emailCheck(String email) throws Exception{
+		return sqlSession.selectOne("member.emailCheck",email);
+	}
+	
 	public void updateMember (Map<String, String> param) throws Exception {
 		sqlSession.update("member.updateMember", param);
 	}
+	
+	public void deleteMember(Map<String, Object> param) throws Exception {
+        sqlSession.update("member.deleteMember", param);
+    }
 
 }

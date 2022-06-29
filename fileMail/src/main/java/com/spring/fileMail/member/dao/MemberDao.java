@@ -28,8 +28,8 @@ public class MemberDao {
 		sqlSession.update("member.updateMember", param);
 	}
 	
-	public void deleteMember(Map<String, Object> param) throws Exception {
-        sqlSession.update("member.deleteMember", param);
+	public void deleteMember(Map<String, Object> params) throws Exception {
+        sqlSession.update("member.deleteMember", params);
     }
 
 }

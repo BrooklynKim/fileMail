@@ -64,15 +64,12 @@ public class MailServiceImpl implements MailService{
 			            if(name.equals(result)) { 
 			            	mailHelper.addAttachment(oriFileNm.toString(), file);
 			            	mailSender.send(mail);
-			            	respMap.put("state","OK");
-			            	
+			            	//respMap.put("state","OK");
 				       }else {
 				           	respMap.put("state","False");
 				       }
-	            
 	    		}       
-	            
-	            //mailSender.send(mail);
+	    		respMap.put("state","OK");//state test code
 			}
         } catch(Exception e) {
         	respMap.put("state","False");

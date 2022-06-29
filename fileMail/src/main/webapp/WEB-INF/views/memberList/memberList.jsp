@@ -9,75 +9,76 @@
 <title>Member List</title>
 <link rel="stylesheet" type="text/css" href="/resources/js/jquery-ui.min.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/ui.jqgrid.css" />
-
+<link href="https://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<!--  <script type="text/javascript" src="/resources/js/common/jquery/jquery-3.2.1.min.js"></script>-->
 <script src="/resources/js/i18n/grid.locale-kr.js" type="text/javascript"></script>
 <script src="/resources/js/minified/jquery.jqGrid.min.js" type="text/javascript"></script>
-<style>
-
-  .ui-jqgrid .ui-jqgrid-htable{
-        	overflow: hidden; 
-        	position:relative; 
-        	height:50px;
-        	font-weight: bold;
-        	font-family:'NanumGothicB','나눔고딕', "돋움", dotum;
-        	font-size:15px;
-        }
-
-  .ui-jqgrid-btable, .ui-pg-table  {
-        	font-family:'NanumGothicB','나눔고딕', "돋움", dotum;
-        	font-size:15px;
-        }
-  
-  .email_ok{
-  			color:#008000;
-  			display:none;
-  		}
-  
-  .email_already{
-  			color:#E00000;
-  			display:none;
-  		}
-  
-  table {
-	       border: 1px solid #333333;
-	       margin: auto;
-	       width : 70%;
-     	}
-     
-     
-   .btn-group button {
-		  background-color:blue; 
-		  border: 1px solid gray; 
-		  color: white; 
-		  padding: 10px 24px;
-		  cursor: pointer;
-		  margin : auto;
-		}
-	
-	
-	.btn-group:after {
-		  content: "";
-		  clear: both;
-		  display: table;
-		}
-	
-	.btn-group button:not(:last-child) {
-		  border-right: none;
-		}
-		
-	.btn-group button:hover {
-	  	  background-color: tomato;
-		}
-	
-	.a button {
-		  width:50%
-	  	} 
-     
-
-</style>
-
+<!--  <script type="text/javascript" src="/resources/js/common/jquery/jquery-3.2.1.min.js"></script>-->
+				<!--  
+				<style>
+					 .ui-jqgrid .ui-jqgrid-htable{
+					        	overflow: hidden; 
+					        	position:relative; 
+					        	height:50px;
+					        	font-weight: bold;
+					        	font-family:'NanumGothicB','나눔고딕', "돋움", dotum;
+					        	font-size:15px;
+					        	overflow-x: hidden
+					        }
+					
+					  .ui-jqgrid-btable, .ui-pg-table  {
+					        	font-family:'NanumGothicB','나눔고딕', "돋움", dotum;
+					        	font-size:15px;
+					        }
+					  
+					  .email_ok{
+					  			color:#008000;
+					  			display:none;
+					  		}
+					  
+					  .email_already{
+					  			color:#E00000;
+					  			display:none;
+					  		}
+					  
+					  table {
+						       border: 1px solid #333333;
+						       margin: auto;
+						       width : 90%;
+					     	}
+					     
+					     
+					   .btn-group button {
+							  background-color:blue; 
+							  border: 1px solid gray; 
+							  color: white; 
+							  padding: 10px 24px;
+							  cursor: pointer;
+							  margin : auto;
+							}
+						
+						
+						.btn-group:after {
+							  content: "";
+							  clear: both;
+							  display: table;
+							}
+						
+						.btn-group button:not(:last-child) {
+							  border-right: none;
+							}
+							
+						.btn-group button:hover {
+						  	  background-color: tomato;
+							}
+						
+						.a button {
+							  width:50%
+						  	} 
+					     				
+				
+				</style>
+				-->
 </head>
 <body>
 <form>
@@ -93,8 +94,8 @@
 				<th>이메일<th>
 					<td>
 						<input id="email" type="email" name="email" required="required" placeholder="이메일을 입력해주세요" oninput="checkEmail()">
-							<!--  <span class="email_ok">사용 할 수 있는 이메일입니다.</span>
-							<span class="email_already">이메일을 다시 입력해주세요.</span>-->
+						  	<span class="email_ok">사용 할 수 있는 이메일입니다.</span>
+							<span class="email_already">이메일을 다시 입력해주세요.</span>
 					</td>	
 				<th>이름<th>
 					<td>
@@ -110,31 +111,30 @@
 						&emsp;
 							
 						<input id="addBtn" type="button" value="입사" onclick="addMember()">
-						<input id="delBtn" type="button" value="퇴사" onclick="delMember()">
-						<input id="updateBtn" type="button" value="수정" onclick="updateMemberInput()">
+						<input id="delBtn" type="button" value="퇴사" onclick="delData('member')">
+						<input id="updateBtn" type="button" value="사원정보수정" onclick="updateMemberInput()">
 						<input id="updateSaveBtn" type="button" value="수정완료" onclick="updateMemberSave()">
 					</td>	
 			</tr>
 		</table>
 	</div>
+	<!--  
 	<div>
 		<span class="email_ok">사용 할 수 있는 이메일입니다.</span>
 		<span class="email_already">이메일을 다시 입력해주세요.</span>
 	</div>
-</form>	
-
-<pre>
-
-</pre>
-	
+	-->
+</form>
+<br>	
+<div class="btn-group a">
+	<button type="button" onclick="location.href='/'">이메일 발송 시스템으로 이동</button>
+</div>
+<br>
 <div id="memberDiv" class="table_wrap">
 	<table id="memberGrid"></table>
 	<div id=pager></div>
 </div>
 
-<div class="btn-group a">
-	<button type="button" onclick="location.href='/'">이메일 발송 시스템</button>
-</div>
 
 <script type="text/javascript">
 
@@ -160,7 +160,7 @@
 		caption : "사원리스트",
 		sortname : 'A_NAME',
 		sortorder : 'asc',
-		pager : '#pager',
+		//pager : '#pager',
 		pgbuttons : true
 	});
 	
@@ -210,7 +210,8 @@
 		form.append("aEmail",$("#email").val());
 		//form.append("aName",$("#name").val());
 		//form.append("aName",encodeURIComponent($("#name").val()));
-		form.append("aName",decodeURI($("#name").val()));
+		//form.append("aName",decodeURI($("#name").val()));
+		form.append("aName",$("#name").val());
 		form.append("rSelect",$('[name=rdoUseYn]:checked').val());
 		
 		if($("#email").val() == ""){
@@ -247,6 +248,7 @@
 						$("#email").val("");
 						$("#name").val("");
 						$('[name=rdoUseYn]:checked').val("");
+						callMember();
 					}else{
 						alert("causes:" + state);
 						$("#email").val("");
@@ -265,7 +267,6 @@
             type:'post', 
             data:{email:email},
             success:function(cnt){ 
-            	console.log(cnt);
                 if(cnt == 0){  
                     $('.email_ok').css("display","inline-block"); 
                     $('.email_already').css("display", "none");
@@ -286,19 +287,10 @@
 	function updateMemberInput(){
 		
 		var	rowId = $("#memberGrid").jqGrid('getGridParam',"selrow");
-		console.log(rowId);
-		
 		var	rowNum = $("#memberGrid").jqGrid('getRowData',rowId).A_NUM;	
-		console.log(rowNum);
-		
 		var	rowEmail = $("#memberGrid").jqGrid('getRowData',rowId).A_EMAIL;	
-		console.log(rowEmail);
-		
 		var	rowName = $("#memberGrid").jqGrid('getRowData',rowId).A_NAME;	
-		console.log(rowName);
-		
 		var	rowUseYn = $("#memberGrid").jqGrid('getRowData',rowId).USE_YN;	
-		console.log(rowUseYn);
 		
 		//var	rowUseYn = $('[name=rdoUseYn]:checked').jqGrid('getRowData',rowId).USE_YN ;
 		
@@ -336,7 +328,6 @@
  		form.append("useYn",$("#rdoUseYnY").val());
  		form.append("useYn",$("#rdoUseYnN").val());
 		//form.append("useYn",$('[name=rdoUseYn]:checked').val());
-		console.log(form);
 		 $.ajax({
 		    	url	: url,
 		        type	: "POST",
@@ -368,15 +359,40 @@
 		});
 	}
 	
+	
+	function delData(res){
+		if(res == 'member'){
+			var checkedRow = jQuery("#memberGrid").jqGrid('getGridParam', "selarrrow" );
+			var data = jQuery("#memberGrid").getRowData(checkedRow);
+			
+			if(checkedRow.length==0){
+				alert("퇴사 처리 할 사원을 선택해 주세요.");
+				}else{
+						if(confirm(checkedRow.length)+" 명을 퇴사 처리 하시겠습니까?"){
+							var delMemberList = [];
+								checkedRow.forEach(function(checkedRow){
+									var objMember = new Object();
+									objMember.A_NUM = data.A_NUM;
+									delMemberList.push(objMember);
+								});
+								delMember(delMemberList);
+								console.log(delMemberList);
+						}
+				}
+		}
+		
+	}
+	
 	function delMember(delMemberList) {
 		
 	 	var tempObj = new Object();
-	 	tempObj.aNumList = delMemberList;
+	 	tempObj.delMemberList = delMemberList;
 		
-    	var url = "/member/delMember"
     	var postdata = {
-    			aNumList	: JSON.stringify(tempObj)
+    			delMemberList : JSON.stringify(tempObj)
     	}
+    	
+    	var url = "/member/delMember"
     	
 	    $.ajax({
 	    	url		: url,
@@ -388,6 +404,7 @@
 	        	
 				if(state == "OK") {
 					alert("퇴사처리 완료 되었습니다.");
+					callMember ();
 	            }
 	            else {
 	                alert("causes:" + state );

@@ -173,3 +173,86 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 .ui-jqgrid .ui-jqgrid-view button {
     font-size: 11px
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ .ui-jqgrid .ui-jqgrid-htable{
+       	overflow: hidden; 
+       	position:relative; 
+       	height:50px;
+       	font-weight: bold;
+       	font-family: 'Hanna', sans-serif;
+       	font-size:15px;
+       	overflow-x: hidden;
+       	background-color: #FFF7DE;
+       }
+
+ .ui-jqgrid-btable, .ui-pg-table  {
+       	font-family:'NanumGothicB','나눔고딕', "돋움", dotum;
+       	font-size:15px;
+       }
+ 
+ .email_ok{
+ 			color:#008000;
+ 			display:none;
+ 		}
+ 
+ .email_already{
+ 			color:#E00000;
+ 			display:none;
+ 		}
+ 
+ table {
+       border: 1px solid #333333;
+       margin: auto;
+       width : 90%;
+    	}
+    
+    
+  .btn-group button {
+	  background-color:#FFF7DE; 
+	  border: 1px solid gray; 
+	  border-radius: 10px;
+	  padding: 10px 24px;
+	  cursor: pointer;
+	  margin : auto;
+	}
+
+
+.btn-group:after {
+	  content: "";
+	  clear: both;
+	  display: table;
+	}
+
+.btn-group button:not(:last-child) {
+	  border-right: none;
+	}
+	
+.btn-group button:hover {
+  	  background-color: Linen;
+	}
+
+.a button {
+	  width:20%;
+	  margin-left: 40%;
+  	} 
+    

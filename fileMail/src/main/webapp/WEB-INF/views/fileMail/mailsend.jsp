@@ -7,56 +7,58 @@
 <title>메일발송</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<link rel="stylesheet" href="resources/css/board.css">
+<link rel="stylesheet" href="/resources/css/board.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
+
 </head>
 <body>
 
 <form method="post" enctype="multipart/form-data">
-	<table class="type06">
-	<thead>
-			<th scope="cols">메일전송</th>
-	</thead>
-	<tbody>	 
+	<div class="titleDiv">이메일 자동 전송 시스템
+		<button type="button" class="move-btn-box" onclick="location.href='/member/memberListPage'">사원리스트로 이동</button>
+	</div>
+	
+	<table class="content-from">
+
+	<tbody class="tableBody">	 
 		 <tr>
 		 	<th scope="row">보내는 사람</th>
 			<td>
 				<input id="fromEmail" type="email" name="email" 
-					required="required" value="mailsender114@gmail.com">
+					required="required" value="mailsender114@gmail.com" disabled="disabled">
 			</td>
 		</tr>
 		
 		<tr>
 			<th scope="row">제목</th>
 			<td>
-				<input id="subject" type="text" name="title" placeholder="제목" required="required" style="border: none;" >
+				<input id="subject" class="title-box" type="text" name="title" placeholder="제목을 입력해주세요." required="required">
 			</td>
 		</tr>
 		
 		<tr>
 			<th scope="row" class="even">첨부 파일</th>	
 			<td class="even">
-				<input id="files" type="file" name="files" multiple="multiple" placeholder="파일" />
+				<input id="files" class="fileBtn" type="file" name="files" multiple="multiple" />
 			</td>
 		</tr>
 		
 		<tr>
 			<th scope="row">내용</th>	
 			<td>
-				<textarea id="content" name="body" class="content"	placeholder="내용"
-					required="required" style="height:300px; width:500px; border: none;"></textarea>
+				<textarea id="content" class="content-box" name="body"	placeholder="내용을 입력해주세요." cols="105" rows="20"
+					required="required"></textarea>
 			</td>
 		</tr>
 	</tbody>	
-		<tr>
-			<td>
-				<input type="button" value="전송" onclick="sendMail()">
-			</td>
-		</tr>
 	</table>
+	
+	<div>
+		<input type="button" class="send-btn-box" value="전송" onclick="sendMail()">
+	</div>
 </form>	
 
-<button type="button" onclick="location.href='/member/memberListPage'">사원리스트</button>
-	<!--  </form>-->
 	<script type="text/javascript">
 	
 	

@@ -33,7 +33,8 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "fileMail/mailsend";
+		//return "fileMail/mailsend";
+		return "home";
 	}
 	
 	

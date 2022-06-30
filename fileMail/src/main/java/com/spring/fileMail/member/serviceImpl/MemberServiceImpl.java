@@ -1,6 +1,5 @@
 package com.spring.fileMail.member.serviceImpl;
 
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,7 +52,7 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return respMap;
 	}
-	*/
+	
 	
 	
 	@Override
@@ -74,6 +73,21 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return respMap;
 	}
+	
+	*/
+	@Override
+	public Map<String,Object> insertMember(Map<String,String> param) {
+		Map<String, Object> respMap = new HashMap<String, Object>();
+		try {
+			memberDao.insetMember(param);
+			respMap.put("state", "OK");
+			}catch(Exception e){
+				respMap.put("state", "False");
+			}
+		return respMap;
+	}
+	
+	
 	
 	
 	@Override

@@ -90,10 +90,10 @@
 				var state = data.state
 				if(state=="OK"){
 					alert("email 전송에 성공했습니다.");
-					location.replace("/mail/sendMail");
+					//location.replace("/mail/sendMail");
 				}else{
 					alert("email 전송에 실패했습니다.");
-					location.replace("/mail/sendMail");
+					//location.replace("/mail/sendMail");
 				}
 			}
 		});

@@ -13,72 +13,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="/resources/js/i18n/grid.locale-kr.js" type="text/javascript"></script>
 <script src="/resources/js/minified/jquery.jqGrid.min.js" type="text/javascript"></script>
-<!--  <script type="text/javascript" src="/resources/js/common/jquery/jquery-3.2.1.min.js"></script>-->
-				<!--  
-				<style>
-					 .ui-jqgrid .ui-jqgrid-htable{
-					        	overflow: hidden; 
-					        	position:relative; 
-					        	height:50px;
-					        	font-weight: bold;
-					        	font-family:'NanumGothicB','나눔고딕', "돋움", dotum;
-					        	font-size:15px;
-					        	overflow-x: hidden
-					        }
-					
-					  .ui-jqgrid-btable, .ui-pg-table  {
-					        	font-family:'NanumGothicB','나눔고딕', "돋움", dotum;
-					        	font-size:15px;
-					        }
-					  
-					  .email_ok{
-					  			color:#008000;
-					  			display:none;
-					  		}
-					  
-					  .email_already{
-					  			color:#E00000;
-					  			display:none;
-					  		}
-					  
-					  table {
-						       border: 1px solid #333333;
-						       margin: auto;
-						       width : 90%;
-					     	}
-					     
-					     
-					   .btn-group button {
-							  background-color:blue; 
-							  border: 1px solid gray; 
-							  color: white; 
-							  padding: 10px 24px;
-							  cursor: pointer;
-							  margin : auto;
-							}
-						
-						
-						.btn-group:after {
-							  content: "";
-							  clear: both;
-							  display: table;
-							}
-						
-						.btn-group button:not(:last-child) {
-							  border-right: none;
-							}
-							
-						.btn-group button:hover {
-						  	  background-color: tomato;
-							}
-						
-						.a button {
-							  width:50%
-						  	} 
-					     				
-				
-				</style>
-				-->
+
 </head>
 <body>
 <form>
@@ -91,6 +26,14 @@
 					<td>
 						<input id="num" type="hidden" name="num">
 					</td>
+				<th>직급</th>
+					<td>
+						<select id="rank" class="">
+							<option value="9999">CEO</option>
+							<option value="1000">임원</option>
+							<option value="2000">사원</option>
+						</select>
+					</td>	
 				<th>이메일<th>
 					<td>
 						<input id="email" type="email" name="email" required="required" placeholder="이메일을 입력해주세요" oninput="checkEmail()">
@@ -127,7 +70,7 @@
 </form>
 <br>	
 <div class="btn-group a">
-	<button type="button" onclick="location.href='/'">이메일 발송 시스템으로 이동</button>
+	<button type="button" onclick="location.href='/mail/mailSendPage'">이메일 발송 시스템으로 이동</button>
 </div>
 <br>
 <div id="memberDiv" class="table_wrap">
@@ -197,23 +140,22 @@
 
 	}
 
-	// form 전송할떄 한글 처리 해야함
-	// 필요에 따라 auto increment -> maxNum으로 변경
+	
 	function addMember(){
-		var form = new FormData();
 		var url = "/member/addMember"
 		var eCheck = $("#email").val();
 		var eRule = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 		var rSelect = $('[name=rdoUseYn]:checked').val();
 		
-		
-		form.append("aEmail",$("#email").val());
-		//form.append("aName",$("#name").val());
-		//form.append("aName",encodeURIComponent($("#name").val()));
-		//form.append("aName",decodeURI($("#name").val()));
-		form.append("aName",$("#name").val());
-		form.append("rSelect",$('[name=rdoUseYn]:checked').val());
-		
+		var aEmail = $("#email").val();
+		var aName = $("#name").val();
+		var useYn = $('[name=rdoUseYn]:checked').val();
+		var postdata = {
+				aEmail : aEmail,
+				aName : aName,
+				rSelect : useYn
+		}
+
 		if($("#email").val() == ""){
 			alert("이메일을 입력해주세요.");
 			$('#email').focus();
@@ -233,15 +175,15 @@
 
 		$.ajax({
 				 type:"POST", 
-				 enctype: 'form-data',
+				 dataType:"JSON",
 				 url:url,
-	             processData: false,   
-	             contentType: false,
-	             //contentType: "application/json; charset:UTF-8", 
-	             cache: false,
-	             data: form,
-				 success : function(data) {
+	             data: postdata,
+	              success : function(data) {
+					console.log(data);
+					
 					var state = data.state;
+					
+					console.log(data);
 					
 					if(state == "OK"){
 						alert("사원 등록이 완료 되었습니다.");
@@ -258,6 +200,7 @@
 				}
 			});		
 	}
+	
 	
 	
 	function checkEmail(){
@@ -312,7 +255,6 @@
 				$("#rdoUseYnY").val(rowUseYn);
 				$("#rdoUseYnN").val(rowUseYn);
 				}
-			
 	}
 		
 	
@@ -346,7 +288,10 @@
 						$('[name=rdoUseYn]:checked').val("");
 						
 						$("#updateBtn").show();
+						$("#addBtn").show();
 						$("#updateSaveBtn").hide();
+					 	$('.email_ok').hide(); 
+	                    $('.email_already').hide();
 						
 						callMember ();
 					}else{
@@ -362,36 +307,38 @@
 	
 	function delData(res){
 		if(res == 'member'){
-			var checkedRow = jQuery("#memberGrid").jqGrid('getGridParam', "selarrrow" );
-			var data = jQuery("#memberGrid").getRowData(checkedRow);
+			
+			var checkedRow = $("#memberGrid").jqGrid('getGridParam', "selarrrow" );
 			
 			if(checkedRow.length==0){
 				alert("퇴사 처리 할 사원을 선택해 주세요.");
-				}else{
-						if(confirm(checkedRow.length)+" 명을 퇴사 처리 하시겠습니까?"){
-							var delMemberList = [];
-								checkedRow.forEach(function(checkedRow){
-									var objMember = new Object();
-									objMember.A_NUM = data.A_NUM;
-									delMemberList.push(objMember);
-								});
-								delMember(delMemberList);
-								console.log(delMemberList);
-						}
+			}else{
+				if(confirm(checkedRow.length+" 명을 퇴사 처리 하시겠습니까?")){
+					var delMemberList = [];
+							
+					checkedRow.forEach(function(checkedRow){
+						var data = $("#memberGrid").getRowData(checkedRow);
+						var objMember = new Object();
+						objMember.A_NUM = data.A_NUM;
+						delMemberList.push(objMember);
+					});
+					
+					delMember(delMemberList);
 				}
+			}
+			
 		}
 		
 	}
 	
 	function delMember(delMemberList) {
-		
 	 	var tempObj = new Object();
 	 	tempObj.delMemberList = delMemberList;
-		
     	var postdata = {
     			delMemberList : JSON.stringify(tempObj)
     	}
     	
+    	console.log(postdata);
     	var url = "/member/delMember"
     	
 	    $.ajax({

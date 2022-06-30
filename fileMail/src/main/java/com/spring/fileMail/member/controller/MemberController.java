@@ -35,7 +35,7 @@ public class MemberController {
 		return memberService.selectMemberList(param);
 	}
 	
-	@RequestMapping(value="/addMember", produces = "application/text; charset=UTF-8")
+	@RequestMapping(value="/addMember")
 	@ResponseBody
 	public Map<String , Object> addMember (@RequestParam Map<String, String> param) throws Exception {
 		return memberService.insertMember(param);

@@ -31,6 +31,8 @@ public class MailServiceImpl implements MailService{
 	public Map<String,Object> selectMemberList(MultipartFile[] files,Map<String,String> param) {
 		Map<String, Object> respMap = new HashMap<String, Object>();
 		
+		int fileFlag = 0;
+		
 		 try {
 			//String to = mailDao.selectMemberList(param.get("toEmail"));
 			List<Map<String,Object>> memberList = mailDao.selectMemberList(param);
@@ -61,16 +63,22 @@ public class MailServiceImpl implements MailService{
 		            
 		            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\brooklyn\\Desktop\\Study\\fileMail\\"+oriFileNm.toString()));
 		            
-			            if(name.equals(result)) { 
-			            	mailHelper.addAttachment(oriFileNm.toString(), file);
-			            	mailSender.send(mail);
-			            	//respMap.put("state","OK");
-				       }else {
-				           	respMap.put("state","False");
-				       }
+		            if(name.equals(result)) { 
+		            	mailHelper.addAttachment(oriFileNm.toString(), file);
+		            	mailSender.send(mail);
+		            	fileFlag++;
+			       }
 	    		}       
-	    		respMap.put("state","OK");//state test code
+	    		
 			}
+			
+			
+			if(fileFlag == files.length) {
+				respMap.put("state","OK");//state test code
+			}else {
+				respMap.put("state","False");
+			}
+				
         } catch(Exception e) {
         	respMap.put("state","False");
             e.printStackTrace();

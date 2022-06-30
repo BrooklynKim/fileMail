@@ -44,6 +44,76 @@ public class MailServiceImpl implements MailService{
 			for(int i=0; i<memberList.size(); i++) {
 				String to = memberList.get(i).get("A_EMAIL").toString();
 				String name = memberList.get(i).get("A_NAME").toString();
+				String num = memberList.get(i).get("A_NUM").toString();
+				
+	    		for(MultipartFile MultiFile : files) {
+	    			//MultipartFile[] mailFile = files;
+	    	        param.put("oriFileNm",MultiFile.getOriginalFilename());
+	    	        String oriFileNm = param.get("oriFileNm");
+	    	        
+	    	        //사번
+	     	        int num_beginIndex = oriFileNm.lastIndexOf("-")+1;
+	     	        int num_endIndex = oriFileNm.lastIndexOf("_");
+	     	        
+	    	        // 이름
+	    	        int beginIndex = oriFileNm.lastIndexOf("_")+1;
+	     	        int endIndex = oriFileNm.lastIndexOf(".");
+
+	     	        String result_name = oriFileNm.substring(beginIndex, endIndex);
+	     	        String result_num = oriFileNm.substring(num_beginIndex, num_endIndex);
+	     	        
+	     	        MimeMessage mail = mailSender.createMimeMessage();
+		            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
+		            
+		            mailHelper.setFrom(from);
+		            mailHelper.setTo(to);
+		            mailHelper.setSubject(subject);
+		            mailHelper.setText(content, true);
+		            
+		            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\brooklyn\\Desktop\\Study\\fileMail\\"+oriFileNm.toString()));
+		            
+		            if(name.equals(result_name)&&num.equals(result_num)) { 
+		            	mailHelper.addAttachment(oriFileNm.toString(), file);
+		            	mailSender.send(mail);
+		            	fileFlag++;
+			       }
+	    		}       
+	    		
+			}
+			
+			
+			if(fileFlag == files.length) {
+				respMap.put("state","OK");//state test code
+			}else {
+				respMap.put("state","False");
+			}
+				
+        } catch(Exception e) {
+        	respMap.put("state","False");
+            e.printStackTrace();
+        }
+		return respMap;
+	}
+	
+	/*
+	// 정상작동2
+	@Override
+	public Map<String,Object> selectMemberList(MultipartFile[] files,Map<String,String> param) {
+		Map<String, Object> respMap = new HashMap<String, Object>();
+		
+		int fileFlag = 0;
+		
+		 try {
+			//String to = mailDao.selectMemberList(param.get("toEmail"));
+			List<Map<String,Object>> memberList = mailDao.selectMemberList(param);
+	
+			String from = param.get("fromEmail");
+			String subject = param.get("subject");
+			String content = param.get("content");
+			
+			for(int i=0; i<memberList.size(); i++) {
+				String to = memberList.get(i).get("A_EMAIL").toString();
+				String name = memberList.get(i).get("A_NAME").toString();
 			
 	    		for(MultipartFile MultiFile : files) {
 	    			//MultipartFile[] mailFile = files;
@@ -85,7 +155,7 @@ public class MailServiceImpl implements MailService{
         }
 		return respMap;
 	}
-	
+	*/
 	
 	/*
 	// 정상작동 1

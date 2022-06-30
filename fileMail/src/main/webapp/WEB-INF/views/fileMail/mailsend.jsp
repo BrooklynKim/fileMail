@@ -15,9 +15,15 @@
 <body>
 
 <form method="post" enctype="multipart/form-data">
-	<div class="titleDiv">이메일 자동 전송 시스템
-		<button type="button" class="move-btn-box" onclick="location.href='/member/memberListPage'">사원리스트로 이동</button>
-	</div>
+	<table>
+		<div class="titleDiv">
+			<a href="/">
+				<img alt="main" src="/resources/css/images/home.png" height="70" width="70">
+			</a>
+			이메일 자동 전송 시스템
+			<button type="button" class="move-btn-box" onclick="location.href='/member/memberListPage'">사원리스트로 이동</button>
+		</div>
+	</table>
 	
 	<table class="content-from">
 
@@ -90,10 +96,8 @@
 				var state = data.state
 				if(state=="OK"){
 					alert("email 전송에 성공했습니다.");
-					//location.replace("/mail/sendMail");
 				}else{
 					alert("email 전송에 실패했습니다.");
-					//location.replace("/mail/sendMail");
 				}
 			}
 		});

@@ -3,7 +3,8 @@
 <mapper namespace="mail">
 
 	<select id="selectMemberList" parameterType="Map" resultType="Map">
-		SELECT  A_EMAIL
+		SELECT   A_NUM
+				,A_EMAIL
 				,A_NAME
 				,USE_YN
 		FROM	MEMBER

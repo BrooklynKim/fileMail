@@ -79,6 +79,10 @@ public class MemberServiceImpl implements MemberService{
 	public Map<String,Object> insertMember(Map<String,String> param) {
 		Map<String, Object> respMap = new HashMap<String, Object>();
 		try {
+			String selectMaxNum = memberDao.selectMaxNum(param.get("aRank"));
+			String maxAnum = param.get("aRank")+selectMaxNum;
+			param.put("aNum", maxAnum);
+			
 			memberDao.insetMember(param);
 			respMap.put("state", "OK");
 			}catch(Exception e){

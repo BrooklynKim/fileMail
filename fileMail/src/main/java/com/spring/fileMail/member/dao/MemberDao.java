@@ -31,5 +31,9 @@ public class MemberDao {
 	public void deleteMember(Map<String, Object> params) throws Exception {
         sqlSession.update("member.deleteMember", params);
     }
+	
+	public String selectMaxNum(String val) throws Exception{
+		return sqlSession.selectOne("member.selectMaxNum",val);
+	}
 
 }

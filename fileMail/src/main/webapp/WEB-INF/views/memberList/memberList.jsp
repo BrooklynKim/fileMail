@@ -24,14 +24,19 @@
 		<table id="mainGrid">
 			<tr>
 					<td>
+						<a href="/">
+							<img alt="main" src="/resources/css/images/home.png" height="70" width="70">
+						</a>
+					</td>
+					<td>
 						<input id="num" type="hidden" name="num">
 					</td>
 				<th>직급</th>
 					<td>
 						<select id="rank" class="">
-							<option value="9999">CEO</option>
-							<option value="1000">임원</option>
-							<option value="2000">사원</option>
+							<option value="A">CEO</option>
+							<option value="B">임원</option>
+							<option value="C" selected>사원</option>
 						</select>
 					</td>	
 				<th>이메일<th>
@@ -81,9 +86,10 @@
 
 <script type="text/javascript">
 
-	var colNames = ['사번','이메일','이름','재직여부'];
+	var colNames = ['사번','직급','이메일','이름','재직여부'];
 	var colModel = [
 		{name:'A_NUM', index:'A_NUM', align:'center', width:30},
+		{name:'A_RANK', index:'A_RANK', align:'center', width:30},
 		{name:'A_EMAIL', index:'A_EMAIL', align:'center'},
 		{name:'A_NAME',	index:'A_NAME',	align:'center', },
 		{name:'USE_YN',	index:'USE_YN',	align:'center', width:30}
@@ -147,10 +153,14 @@
 		var eRule = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 		var rSelect = $('[name=rdoUseYn]:checked').val();
 		
+		var aNum = $("#num").val();
+		var aRank = $("#rank").val();
 		var aEmail = $("#email").val();
 		var aName = $("#name").val();
 		var useYn = $('[name=rdoUseYn]:checked').val();
 		var postdata = {
+				aNum : aNum,
+				aRank: aRank,
 				aEmail : aEmail,
 				aName : aName,
 				rSelect : useYn
@@ -183,13 +193,12 @@
 					
 					var state = data.state;
 					
-					console.log(data);
-					
 					if(state == "OK"){
 						alert("사원 등록이 완료 되었습니다.");
+						$("#rank").val("");
 						$("#email").val("");
 						$("#name").val("");
-						$('[name=rdoUseYn]:checked').val("");
+						$('[name=rdoUseYn]:checked').val();
 						callMember();
 					}else{
 						alert("causes:" + state);
@@ -200,8 +209,6 @@
 				}
 			});		
 	}
-	
-	
 	
 	function checkEmail(){
 		var email = $('#email').val();
@@ -230,12 +237,11 @@
 	function updateMemberInput(){
 		
 		var	rowId = $("#memberGrid").jqGrid('getGridParam',"selrow");
-		var	rowNum = $("#memberGrid").jqGrid('getRowData',rowId).A_NUM;	
+		var	rowNum = $("#memberGrid").jqGrid('getRowData',rowId).A_NUM;
+		var rowRank = $("#memberGrid").jqGrid('getRowData',rowId).A_RANK;
 		var	rowEmail = $("#memberGrid").jqGrid('getRowData',rowId).A_EMAIL;	
 		var	rowName = $("#memberGrid").jqGrid('getRowData',rowId).A_NAME;	
 		var	rowUseYn = $("#memberGrid").jqGrid('getRowData',rowId).USE_YN;	
-		
-		//var	rowUseYn = $('[name=rdoUseYn]:checked').jqGrid('getRowData',rowId).USE_YN ;
 		
 			if(rowId==undefined||rowId==""){
 				alert("수정 할 행을 선택해주세요.");
@@ -247,18 +253,17 @@
 				$("#addBtn").hide();
 				
 				$("#num").val(rowNum);
+				$("#rank").val(rowRank);
 				$("#email").val(rowEmail);
 				
 				$("#name").val(rowName);
 				$("#name").attr("disabled",true);
 				
-				$("#rdoUseYnY").val(rowUseYn);
-				$("#rdoUseYnN").val(rowUseYn);
+				$('input[name=rdoUseYn]').attr("disabled",true);
+				
 				}
 	}
 		
-	
-	
 	
 
 	function updateMemberSave(){

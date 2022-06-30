@@ -4,38 +4,39 @@
 	
 	<select id="selectMemberList" parameterType="Map" resultType="Map">
 		SELECT		A_NUM
+					,A_RANK
 					,A_EMAIL
 					,A_NAME
 					,USE_YN
 		FROM		MEMBER
-		WHERE		USE_YN		= "Y"
+		<!--  WHERE		USE_YN		= "Y"-->
 		ORDER BY 	A_NUM DESC
 	</select>
 	
 	<insert id="insetMember">
 		INSERT INTO MEMBER (
 				A_NUM
+			   ,A_RANK
 			   ,A_EMAIL
 			   ,A_NAME
 			   ,USE_YN
 	    	)VALUES(
-	    		DEFAULT
+	    		#{aNum}
+	    	   ,#{aRank}	
 	    	   ,#{aEmail}
 	    	   ,#{aName}
 	    	   ,#{rSelect}
 	    	)
 	</insert>
 	
-	<!--  
-	<update id="updateMember">
-		UPDATE		MEMBER
-		SET			A_NUM		= #{aNum}
-				   ,A_EMAIL		= #{aEmail}
-				   ,A_NAME		= #{aName}
-				   ,USE_YN		= #{useYn}
-		WHERE		A_NUM		= #{aNum}		   
-	</update>
-	-->
+	<select id="selectMaxNum" resultType="String">
+		SELECT		LPAD( IFNULL( MAX( SUBSTR(A.A_NUM, 2, 4) ) + 1 ,1  ),4,'0') AS MaxNum
+		FROM		(SELECT		A_NUM
+					FROM 		MEMBER
+					WHERE		A_RANK	= #{aRank})A;
+	</select>
+	
+	
 	<update id="updateMember">
 		UPDATE		MEMBER
 		SET		    A_EMAIL		= #{aEmail}

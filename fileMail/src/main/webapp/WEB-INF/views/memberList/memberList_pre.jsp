@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Member List</title>
 <link rel="stylesheet" type="text/css" href="/resources/js/jquery-ui.min.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/ui.jqgrid.css" />

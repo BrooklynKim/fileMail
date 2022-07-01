@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Member List</title>
 <link rel="stylesheet" type="text/css" href="/resources/js/jquery-ui.min.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/ui.jqgrid.css" />
@@ -17,9 +17,6 @@
 </head>
 <body>
 <form>
-<pre>
-
-</pre>
 	<div class="tableWrap">
 		<table id="mainGrid">
 			<tr>
@@ -62,26 +59,21 @@
 						<input id="delBtn" type="button" value="퇴사" onclick="delData('member')">
 						<input id="updateBtn" type="button" value="사원정보수정" onclick="updateMemberInput()">
 						<input id="updateSaveBtn" type="button" value="수정완료" onclick="updateMemberSave()">
-					</td>	
+					</td>
+					<td>
+						<button type="button" onclick="location.href='/mail/mailSendPage'" style="background-color: Linen; height: 50px; border-radius: 2px;">이메일 발송 시스템으로 이동</button>
+					</td>
 			</tr>
 		</table>
 	</div>
-	<!--  
-	<div>
-		<span class="email_ok">사용 할 수 있는 이메일입니다.</span>
-		<span class="email_already">이메일을 다시 입력해주세요.</span>
-	</div>
-	-->
 </form>
-<br>	
-<div class="btn-group a">
-	<button type="button" onclick="location.href='/mail/mailSendPage'">이메일 발송 시스템으로 이동</button>
-</div>
+
 <br>
-<div id="memberDiv" class="table_wrap">
-	<table id="memberGrid"></table>
-	<div id=pager></div>
-</div>
+
+	<div id="memberDiv" class="table_wrap">
+		<table id="memberGrid"></table>
+		<div id=pager></div>
+	</div>
 
 
 <script type="text/javascript">
@@ -189,7 +181,6 @@
 				 url:url,
 	             data: postdata,
 	              success : function(data) {
-					console.log(data);
 					
 					var state = data.state;
 					
@@ -343,7 +334,6 @@
     			delMemberList : JSON.stringify(tempObj)
     	}
     	
-    	console.log(postdata);
     	var url = "/member/delMember"
     	
 	    $.ajax({

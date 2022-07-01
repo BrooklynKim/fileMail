@@ -9,8 +9,8 @@
 					,A_NAME
 					,USE_YN
 		FROM		MEMBER
-		<!--  WHERE		USE_YN		= "Y"-->
-		ORDER BY 	A_NUM DESC
+		<!--  WHERE		USE_YN		= "Y"
+		ORDER BY 	A_NUM DESC-->
 	</select>
 	
 	<insert id="insetMember">

@@ -62,6 +62,10 @@ public class MailServiceImpl implements MailService{
 	     	        String result_name = oriFileNm.substring(beginIndex, endIndex);
 	     	        String result_num = oriFileNm.substring(num_beginIndex, num_endIndex);
 	     	        
+	     	        String totalResult = new String(result_num+"_"+result_name);
+	     	        // A0000_홍길동
+	     	        String fileNm = new String(num+"_"+name);
+	     	        
 	     	        MimeMessage mail = mailSender.createMimeMessage();
 		            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
 		            
@@ -72,7 +76,7 @@ public class MailServiceImpl implements MailService{
 		            
 		            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\brooklyn\\Desktop\\Study\\fileMail\\"+oriFileNm.toString()));
 		            
-		            if(name.equals(result_name)&&num.equals(result_num)) { 
+		            if(totalResult.equals(fileNm)) { 
 		            	mailHelper.addAttachment(oriFileNm.toString(), file);
 		            	mailSender.send(mail);
 		            	fileFlag++;

@@ -1,3 +1,4 @@
+
 /*Grid*/
 .ui-jqgrid {position: relative;}
 .ui-jqgrid .ui-jqgrid-view {position: relative;left:0; top: 0; padding: 0; font-size:11px;}
@@ -202,7 +203,7 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
        	font-family: 'Hanna', sans-serif;
        	font-size:15px;
        	overflow-x: hidden;
-       	background-color: #FFF7DE;
+       	background-color: #373737;
        }
 
  .ui-jqgrid-btable, .ui-pg-table  {
@@ -221,14 +222,14 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
  		}
  
  table {
-       border: 1px solid #333333;
+       border: 1px solid WhiteSmoke;
        margin: auto;
        width : 90%;
     	}
     
     
   .btn-group button {
-	  background-color:#FFF7DE; 
+	  background-color:#FFDE82;
 	  border: 1px solid gray; 
 	  border-radius: 10px;
 	  padding: 10px 24px;
@@ -255,4 +256,10 @@ a.g-menu-item, a.soptclass, a.clearsearchclass { cursor: pointer; }
 	  width:20%;
 	  margin-left: 40%;
   	} 
+
+body{
+    color: #a8a7a8;
+    background: #373737 url("bg.png") 0 0 repeat;
+}
+
     

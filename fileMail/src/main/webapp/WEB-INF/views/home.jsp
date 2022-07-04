@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Ezensys Send Mail System</title>
+        <title>Ezensys</title>
         <link rel="icon" type="image/x-icon" href="/resources/css/homeImg/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -60,7 +60,7 @@
 	                    <div class="col-xl-4 col-lg-5">
 	                        <div class="featured-text text-center text-lg-left">
 	                            <h4 class="text-white">Employee</h4>
-	                            <p class="mb-0 text-white-50">It helps you manage your employees more easily and comfortably!Click on the image on the left to go to the Employee Management page.</p>
+	                            <p class="mb-0 text-white-50">It helps you manage your employees more easily and comfortably! Click on the image on the left to go to the Employee Management page.</p> 
 	                        </div>
 	                    </div>
 	                </div>
@@ -149,7 +149,7 @@
                                 <i class="fas fa-envelope text-primary mb-2"></i>
                                 <h4 class="text-uppercase m-0">Email</h4>
                                 <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50"><a href="#!">kimyc@ezensys.co.kr</a></div>
+                                <div class="small text-black-50">kimyc@ezensys.co.kr</div>
                             </div>
                         </div>
                     </div>

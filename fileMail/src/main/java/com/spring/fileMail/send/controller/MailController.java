@@ -34,59 +34,8 @@ public class MailController {
 	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> sendMailTest(@RequestParam(value="files") MultipartFile[] files,@RequestParam Map<String, String> param, MultipartHttpServletRequest request) throws Exception{
-		request.setCharacterEncoding("UTF-8");
+		//request.setCharacterEncoding("UTF-8");
 		return MailService.selectMemberList(files, param);
 	}
 	
-	
-	
-	/*
-	  	@Autowired
-		private JavaMailSender mailSender;
-	
-		@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
-	    public Map<String,Object> sendMailTest(@RequestParam(value="files") MultipartFile[] files,@RequestParam Map<String, String> param, MultipartHttpServletRequest request) throws Exception{
-	        
-			Map<String, Object> respMap = new HashMap<String, Object>();
-			
-			String from = param.get("fromEmail");
-			String to = param.get("toEmail");
-			String subject = param.get("subject");
-	        String content = param.get("content");
-	    try {
-	    	
-	    		for(MultipartFile MultiFile : files) {
-	    			MultipartFile[] mailFile = files;
-	    	        param.put("oriFileNm",MultiFile.getOriginalFilename());
-	    	        String oriFileNm = param.get("oriFileNm");
-	    	        int beginIndex = oriFileNm.lastIndexOf("_")+1;
-	     	        int endIndex = oriFileNm.lastIndexOf(".");
-	     	        String result = oriFileNm.substring(beginIndex, endIndex);
-	     	        
-	     	        MimeMessage mail = mailSender.createMimeMessage();
-		            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"charset=UTF-8");
-		            
-		            mailHelper.setFrom(from);
-		            mailHelper.setTo(to);
-		            mailHelper.setSubject(subject);
-		            mailHelper.setText(content, true);
-		            
-		            FileSystemResource file = new FileSystemResource(new File("C:\\Users\\brooklyn\\Desktop\\Study\\fileMail\\"+oriFileNm.toString()));
-		            
-		            if("홍길동".equals(result)) { 
-		            	mailHelper.addAttachment(oriFileNm.toString(), file);
-		            	mailSender.send(mail);
-		            }else {
-		            	respMap.put("state","False");
-		            }
-		            //mailSender.send(mail);
-		            respMap.put("state","OK");
-	    		}
-	        } catch(Exception e) {
-	        	respMap.put("state","False");
-	            e.printStackTrace();
-	        }
-	        return respMap;
-		}
-	*/
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta content="UTF-8">
-<title>메일발송</title>
+<title>Email System</title> 
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <link rel="stylesheet" href="/resources/css/board.css">
@@ -30,20 +30,7 @@
 			</td>
 		</tr>
 	</table>
-	<!--  
-		<div class="titleDiv">
-			<div style="float: left">
-				<a href="/">
-					<img alt="main" src="/resources/css/images/home.png" height="50" width="50">
-				</a>
-			</div>
-			<div style="float: right;">
-					<button type="button" class="move-btn-box" onclick="location.href='/member/memberListPage'">사원리스트로 이동</button>
-			</div>
-			<br><div style="text-align: center">이메일 자동 전송 시스템</div><br>	
-		</div>
-	-->
-		
+
 	<table class="content-from">
 	
 		<tbody class="tableBody">	 
@@ -72,7 +59,7 @@
 			<tr>
 				<th scope="row">내용</th>	
 				<td>
-					<textarea id="content" class="content-box" name="body"	placeholder="내용을 입력해주세요." cols="105" rows="15"
+					<textarea id="content" class="content-box" name="body"	placeholder="내용을 입력해주세요." cols="125" rows="15"
 						required="required"></textarea>
 				</td>
 			</tr>
@@ -82,8 +69,27 @@
 	<div align="center">
 		<input type="button" class="send-btn-box" value="전송" onclick="sendMail()">
 	</div>
-
-
+	
+	<!--  
+	<div id="loading" class="loading" style="display: none;">  
+		<div class="spinner">
+		  <div class="bounce1"></div>
+		  <div class="bounce2"></div>
+		  <div class="bounce3"></div>
+		</div>
+	</div>
+	-->
+	
+	<div id="loading" class="loading" style="display: none;">
+		<div class="spinner">
+		  <div class="rect1"></div>
+		  <div class="rect2"></div>
+		  <div class="rect3"></div>
+		  <div class="rect4"></div>
+		  <div class="rect5"></div>
+		</div>
+	</div>
+	
 	<script type="text/javascript">
 	
 	// 파일 확장자 check_1
@@ -119,7 +125,6 @@
 			form.append('files',files[i]);
 			files[i].name; // 파일 이름 test
 		}
-		console.log(form.subject);
 		$.ajax({
 			url : url,
 			type : "POST",
@@ -129,6 +134,9 @@
             contentType: false,
             cache: false,
 			data : form,
+			beforeSend: function() {
+			  $('#loading').show();
+				 },
 			success:function(data){
 				console.log(data);
 				var state = data.state
@@ -138,7 +146,10 @@
 				}else{
 					alert("email 전송에 실패했습니다.");
 				}
-			}
+			},
+			 complete: function() {
+				  $('#loading').hide();
+				 }
 		});
 	}
 	</script>

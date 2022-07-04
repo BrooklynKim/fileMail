@@ -9,4 +9,3 @@ public interface MailService {
 	public Map<String,Object> selectMemberList(MultipartFile[] files,Map<String,String> param);
 	
 }
-

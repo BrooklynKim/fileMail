@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Member List</title>
+<title>Employee System</title>
 <link rel="stylesheet" type="text/css" href="/resources/js/jquery-ui.min.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/ui.jqgrid.css" />
 <link href="https://fonts.googleapis.com/earlyaccess/hanna.css" rel="stylesheet">
@@ -52,9 +52,7 @@
 							<span>Y</span>
 						<input type="radio" name="rdoUseYn" id="rdoUseYnN" value="N">
 							<span>N</span>
-						
-						&emsp;
-							
+					&emsp;
 						<input id="addBtn" type="button" value="입사" onclick="addMember()">
 						<input id="delBtn" type="button" value="퇴사" onclick="delData('member')">
 						<input id="updateBtn" type="button" value="사원정보수정" onclick="updateMemberInput()">
@@ -74,14 +72,13 @@
 		<table id="memberGrid"></table>
 		<div id=pager></div>
 	</div>
-
+	
 
 <script type="text/javascript">
 
-	var colNames = ['사번','직급','이메일','이름','재직여부'];
+	var colNames = ['사번','이메일','이름','재직여부'];
 	var colModel = [
 		{name:'A_NUM', index:'A_NUM', align:'center', width:30},
-		{name:'A_RANK', index:'A_RANK', align:'center', width:30},
 		{name:'A_EMAIL', index:'A_EMAIL', align:'center'},
 		{name:'A_NAME',	index:'A_NAME',	align:'center', },
 		{name:'USE_YN',	index:'USE_YN',	align:'center', width:30}
@@ -124,7 +121,6 @@
 			   $("#memberGrid").clearGridData();
 			   $("#memberGrid").jqGrid('setGridParam',{data: data.list});
 			   $("#memberGrid").trigger('reloadGrid');
-			  
 			   for(var i=0; i<=data.list.length;i++){
 				   $("#memberGrid").jqGrid('addRowData',i+1,data.list[i]);
 			   }
@@ -137,8 +133,38 @@
 		}); 
 
 	}
-
 	
+	
+	/*
+	function callMember(){
+	$.ajax({
+	   url:"/member/memberList",		
+	   mtype:"GET",
+	   data : {},
+	   dataType: "JSON",
+	   async : false,
+	   success:function(data){
+		   $("#memberGrid").clearGridData();
+		   $("#memberGrid").jqGrid('setGridParam',{data: data.list});
+		   $("#memberGrid").trigger('reloadGrid');
+		   for(var i=0; i<=data.list.length;i++){
+			   var chkBox = $("#memberGrid").jqGrid('addRowData',i+1,data.list[i]);
+				   if("Y"!=chkBox.useYn){
+					   $("#memberGrid"+chkBox.useYn).attr("disabled".true);
+				   }else{
+					   $("#memberGrid").jqGrid('addRowData',i+1,data.list[i]);
+				   		}
+		   }
+	   },
+	   error : function(xhr, status, error) {
+		   alert(xhr.status);
+	   },
+		complete : function(){
+		}
+	}); 
+
+}
+	*/
 	function addMember(){
 		var url = "/member/addMember"
 		var eCheck = $("#email").val();
@@ -186,10 +212,10 @@
 					
 					if(state == "OK"){
 						alert("사원 등록이 완료 되었습니다.");
-						$("#rank").val("");
 						$("#email").val("");
 						$("#name").val("");
 						$('[name=rdoUseYn]:checked').val();
+						$("#rank option:selected").val();
 						callMember();
 					}else{
 						alert("causes:" + state);
@@ -235,7 +261,7 @@
 		var	rowUseYn = $("#memberGrid").jqGrid('getRowData',rowId).USE_YN;	
 		
 			if(rowId==undefined||rowId==""){
-				alert("수정 할 행을 선택해주세요.");
+				alert("수정 할 사원을 선택해주세요.");
 				return;
 			}else{
 				$("#updateBtn").hide();
@@ -244,8 +270,10 @@
 				$("#addBtn").hide();
 				
 				$("#num").val(rowNum);
-				$("#rank").val(rowRank);
 				$("#email").val(rowEmail);
+				
+				$("#rank").val(rowRank);
+				$("#rank").attr("disabled",true);
 				
 				$("#name").val(rowName);
 				$("#name").attr("disabled",true);

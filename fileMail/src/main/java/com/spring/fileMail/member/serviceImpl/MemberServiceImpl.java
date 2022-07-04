@@ -33,48 +33,7 @@ public class MemberServiceImpl implements MemberService{
 		return respMap;
 	}
 	
-	/*
-	@Override
-	public Map<String,Object> insertMember(Map<String,String> param) {
-		Map<String, Object> respMap = new HashMap<String, Object>();
-		try {
-			memberDao.insetMember(param);
-				if(param.get("aName")!="") {
-					String korean = param.get("aName");
-					URLEncoder.encode(korean,"UTF-8");
-					param.put("aName", "aName");
-					respMap.put("state", "OK");
-				}
-			respMap.put("state", "OK");
-		}catch(Exception e) {
-			e.printStackTrace();
-			respMap.put("state", "False");
-		}
-		return respMap;
-	}
-	
-	
-	
-	@Override
-	public Map<String,Object> insertMember(Map<String,String> param) {
-		Map<String, Object> respMap = new HashMap<String, Object>();
-		try {
-				if(param.get("aName")!="") {
-					String korean = param.get("aName");
-					URLEncoder.encode(korean,"UTF-8");
-					param.put("aName", korean);
-					memberDao.insetMember(param);
-					respMap.put("state", "OK");
-				}
-			respMap.put("state", "OK");
-		}catch(Exception e) {
-			e.printStackTrace();
-			respMap.put("state", "False");
-		}
-		return respMap;
-	}
-	
-	*/
+
 	@Override
 	public Map<String,Object> insertMember(Map<String,String> param) {
 		Map<String, Object> respMap = new HashMap<String, Object>();

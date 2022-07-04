@@ -34,6 +34,7 @@ public class MailController {
 	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> sendMailTest(@RequestParam(value="files") MultipartFile[] files,@RequestParam Map<String, String> param, MultipartHttpServletRequest request) throws Exception{
+		request.setCharacterEncoding("UTF-8");
 		return MailService.selectMemberList(files, param);
 	}
 	

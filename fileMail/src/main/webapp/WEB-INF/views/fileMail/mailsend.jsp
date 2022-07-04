@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 
-	pageEncoding="UTF-8"%>	
+	pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>			
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta content="UTF-8">
 <title>메일발송</title>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -13,7 +14,7 @@
 
 </head>
 <body>
-
+	
 
 	<table class="cssTable">
 		<tr>
@@ -118,7 +119,7 @@
 			form.append('files',files[i]);
 			files[i].name; // 파일 이름 test
 		}
-		
+		console.log(form.subject);
 		$.ajax({
 			url : url,
 			type : "POST",
